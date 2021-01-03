@@ -1,0 +1,44 @@
+<html><body>
+  <form action="/elastic/" method="post">
+    {% csrf_token %}
+      <label>検索ワード</label>
+      <input type="text" id="word" value="{{keyword}}" name="word">
+    <input type="submit" value="検索">
+  </form>
+
+  {% if docs %}
+    <table border=1>
+      {% for doc in docs %}
+          {% if forloop.first %}
+              <tr><th>カテゴリ</th><th>コメント</th></tr>
+          {% endif %}
+          <tr>
+              <td width="180">
+              {% if doc.category == 1 %}
+              道路計画や道路整備に関すること
+              {% elif doc.category == 2 %}
+              外環、京王連立事業、下北沢周辺整備などに関すること
+              {% elif doc.category == 3 %}
+              誰もが利用しやすい交通環境の整備・確保に関すること
+              {% elif doc.category == 4 %}
+              道路工事、および維持・管理に関すること
+              {% elif doc.category == 5 %}
+              自転車走行環境、マナーに関すること
+              {% elif doc.category == 6 %}
+              交通安全施設などの設置、および規制、取締りの強化に関すること
+              {% elif doc.category == 7 %}
+              その他の道路における困りごとなど
+              {% elif doc.category == 8 %}
+              その他（公園などの整備、道路整備以外の災害対策など）
+              {% elif doc.category == 9 %}
+              本アンケート調査について
+              {% endif %}
+              </td>
+              <td width="540">{{ doc.comment }}</td>
+          </tr>
+    {% endfor %}
+  </table>
+  {% elif keyword %}
+    ヒットゼロ
+  {% endif %} 
+</body></html>

@@ -1,0 +1,43 @@
+{
+  "settings": {
+    "analysis": {
+      "tokenizer": {
+          "kuromoji_tokenizer_search": {
+            "type": "kuromoji_tokenizer",
+            "mode": "search",
+            "discard_punctuation" : "true",
+            "user_dictionary" : "dict/userdict_ja.txt"
+          },
+          "bigram-tokenizer": {
+            "type" : "nGram",
+            "min_gram" : "2",
+            "max_gram" : "2"
+          }
+      },
+      "analyzer": {
+        "kuromoji_analyzer": {
+          "type": "custom",
+          "tokenizer": "kuromoji_tokenizer_search",
+          "filter": [
+              "kuromoji_baseform",
+              "kuromoji_part_of_speech",
+              "cjk_width",
+              "ja_stop",
+              "lowercase",
+              "custom_synonym"
+          ]
+        },
+        "bigram-analyzer" : {
+          "type" : "custom",
+          "tokenizer" : "bigram-tokenizer"
+        }
+      },
+      "filter": {
+        "custom_synonym": {
+          "type": "synonym",
+          "synonyms_path" : "dict/user_synonyms.txt"
+        }
+      }
+    }
+  }
+}

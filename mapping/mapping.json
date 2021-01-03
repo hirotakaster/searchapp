@@ -1,0 +1,12 @@
+{
+    "properties": {
+       "category": {
+         "type": "integer"
+       },
+       "comment": {
+         "type": "text",
+         "fielddata": true,
+         "analyzer": "kuromoji_analyzer"
+       }
+    }
+ }
